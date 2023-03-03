@@ -43,7 +43,8 @@ if [ $(az storage account list --query "length([?resourceGroup=='${resource_grou
 		stateResourceGroup=$TF_BACKEND_RG \
 		stateStorageName=$TF_BACKEND_SA \
 		stateContainerName=$TF_BACKEND_CONTAINER \
-		dataContribPrincipalId=$OBJECT_ID
+		dataContribPrincipalId=$OBJECT_ID \
+  > /dev/null
 	sleep 30s
 fi
 

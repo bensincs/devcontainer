@@ -1,0 +1,5 @@
+{
+	"name": "Ben's Dev Container",
+	"dockerFile": "Dockerfile",
+	"remoteUser": "developer"
+}

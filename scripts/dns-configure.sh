@@ -18,10 +18,10 @@ function finish {
 }
 trap finish EXIT
 
-dns_forwarder_ip=$(terraform output dns_forwarder_ip)
+dns_forwarder_ip=$(terraform output dns_forwarder_ip | tr -d \")
 echo "=== Ensure VPN is connected (ping dns-forwarder:$dns_forwarder_ip)"
 set +e # handling this error and want ping output to show to user
-ping -w 20 -c 5 "$dns_forwarder_ip" # 5 pings for confidence, wait up to 10s overall
+ping -w 20 -c 5 $dns_forwarder_ip # 5 pings for confidence, wait up to 10s overall
 ping_result=$?
 set -e
 if [[ "$ping_result" == "0" ]]; then

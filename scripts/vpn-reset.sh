@@ -12,4 +12,4 @@ if [[ -f $DIR/../.devinfrastructure/vpn/.resolv.bak ]]; then
     sudo bash -c "cat $DIR/../.devinfrastructure/vpn/.resolv.bak > /etc/resolv.conf"
 fi
 
-rm -rf "${DIR}/../infrastructure/vpn/.vpn-config/openvpn.ovpn"
+rm -rf "${DIR}/../.devinfrastructure/vpn/.vpn-config/openvpn.ovpn"

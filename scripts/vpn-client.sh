@@ -26,17 +26,17 @@ else
   echo "=== Creating VPN config"
 
   # Get vars from TF State
-  VPN_ID=$(terraform output vpn_id)
-  VPN_CLIENT_CERT=$(terraform output client_cert)
-  VPN_CLIENT_KEY=$(terraform output client_key)
+  VPN_ID=$(terraform output vpn_id | tr -d \")
+  VPN_CLIENT_CERT=$(terraform output -json client_cert | tr -d \")
+  VPN_CLIENT_KEY=$(terraform output  -json client_key | tr -d \")
 
   # Replace newlines with \n so sed doesn't break
-  VPN_CLIENT_CERT="${VPN_CLIENT_CERT//$'\n'/\\n}"
-  VPN_CLIENT_KEY="${VPN_CLIENT_KEY//$'\n'/\\n}"
+  # VPN_CLIENT_CERT="${VPN_CLIENT_CERT//$'\n'/\\n}"
+  # VPN_CLIENT_KEY="${VPN_CLIENT_KEY//$'\n'/\\n}"
 
   echo "Generating vpn client for VPN_ID: $VPN_ID"
 
-  CONFIG_URL=$(az network vnet-gateway vpn-client generate --ids $VPN_ID -o tsv)
+  CONFIG_URL=$(az network vnet-gateway vpn-client generate --ids "$VPN_ID" -o tsv)
   curl -o "vpnconfig.zip" "$CONFIG_URL"
   # Ignore complaint about backslash in filepaths
   unzip -o "vpnconfig.zip" -d "./vpnconftemp"|| true

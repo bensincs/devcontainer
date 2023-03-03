@@ -1,6 +1,7 @@
 # Terraform
 .terraform
 .terraform.tfstate.lock.info
+.terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfstate.d
@@ -17,3 +18,5 @@ infrastructure/vpn/.vpn-config/*
 .sshDNSKey
 infrastructure/vpn/.resolv.bak
 infrastructure/vpn/vpn-plan
+.vpn-config
+.resolv.bak

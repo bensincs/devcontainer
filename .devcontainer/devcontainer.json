@@ -2,13 +2,7 @@
 	"name": "Ben's Dev Container",
 	"dockerFile": "Dockerfile",
 	"remoteUser": "developer",
-	"customizations": {
-		"vscode":{
-			"extensions": [
-				"ms-vscode.azure-account",
-				"hashicorp.terraform"
-			  ]
-		}
-	}
-
+	"runArgs": [
+		"--cap-add=NET_ADMIN"
+	]
 }

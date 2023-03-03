@@ -43,3 +43,16 @@ resource "azurerm_subnet_network_security_group_association" "denyRDP" {
   subnet_id                 = azurerm_subnet.default_subnet.id
   network_security_group_id = azurerm_network_security_group.denyRDP.id
 }
+
+resource "azurerm_private_dns_zone" "local" {
+  name                = "dev.local"
+  resource_group_name = azurerm_resource_group.developer_network.name
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "local" {
+  name                  = "dev.local"
+  resource_group_name   = azurerm_resource_group.developer_network.name
+  private_dns_zone_name = azurerm_private_dns_zone.local.name
+  virtual_network_id    = azurerm_virtual_network.vpn_net.id
+  registration_enabled  = true
+}

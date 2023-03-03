@@ -7,6 +7,8 @@ help: ## show this help
 # VPN
 vpn: ## Deploy a VPN Gateway
 	@./scripts/vpn-create.sh
+vpn-destroy: ## Deploy a VPN Gateway
+	@./scripts/vpn-destroy.sh
 vpn-client: ## **CAUTION** Setup a VPN Client
 	@./scripts/vpn-client.sh
 	@./scripts/dns-configure.sh

@@ -28,7 +28,7 @@ if [ -z "$KEY" ]; then
     exit
 fi
 
-source ./load-env.sh
+source $SCRIPT_DIR/load-env.sh
 
 echo -e "\n\e[34m»»» ✅ \e[96mGetting object id\e[0m..."
 OBJECT_ID=$(az account get-access-token --query "accessToken" -o tsv | jq -R -r 'split(".") | .[1] | @base64d | fromjson | .oid')

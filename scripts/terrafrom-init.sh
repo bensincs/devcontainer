@@ -38,7 +38,7 @@ if [ $(az storage account list --query "length([?resourceGroup=='${resource_grou
     echo -e "\n\e[34m»»» ✅ \e[96mCreating backend\e[0m..."
 	az deployment sub create \
 	--location $LOCATION \
-	--template-file $SCRIPT_DIR/../dev-infrastructure/tf-backend/tfstate.bicep \
+	--template-file $SCRIPT_DIR/../.devinfrastructure/tf-backend/tfstate.bicep \
 	--parameters \
 		stateResourceGroup=$TF_BACKEND_RG \
 		stateStorageName=$TF_BACKEND_SA \

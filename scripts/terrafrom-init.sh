@@ -30,7 +30,7 @@ fi
 
 source $SCRIPT_DIR/load-env.sh
 
-echo -e "\n\e[34m»»» ✅ \e[96mGetting object id\e[0m..."
+echo -e "\n\e[34m»»» ✅ \e[96mGetting object id of current identity \e[0m..."
 OBJECT_ID=$(az account get-access-token --query "accessToken" -o tsv | jq -R -r 'split(".") | .[1] | @base64d | fromjson | .oid')
 
 echo -e "\n\e[34m»»» ✅ \e[96mChecking backend exists\e[0m..."

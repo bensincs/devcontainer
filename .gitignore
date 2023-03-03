@@ -1,0 +1,19 @@
+# Terraform
+.terraform
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfstate.d
+infrastructure/main/ci-plan
+infrastructure/post-deployment/post-deployment-plan
+infrastructure/terraform-plugin-dir/
+caApimCert.cer
+
+# VPN configuration
+*.der
+*.pem
+*.cer
+infrastructure/vpn/.vpn-config/*
+.sshDNSKey
+infrastructure/vpn/.resolv.bak
+infrastructure/vpn/vpn-plan

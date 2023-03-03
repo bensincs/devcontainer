@@ -34,7 +34,7 @@ echo -e "\n\e[34m»»» ✅ \e[96mGetting object id of current identity \e[0m...
 OBJECT_ID=$(az account get-access-token --query "accessToken" -o tsv | jq -R -r 'split(".") | .[1] | @base64d | fromjson | .oid')
 
 echo -e "\n\e[34m»»» ✅ \e[96mChecking backend exists\e[0m..."
-if [ $(az storage account list --query "length([?resourceGroup=='${resource_group}' && name=='${storage_account_name}'])") -ne 1 ]; then
+if [ $(az storage account list --query "length([?resourceGroup=='$TF_BACKEND_RG' && name=='$TF_BACKEND_SA'])") -ne 1 ]; then
     echo -e "\n\e[34m»»» ✅ \e[96mCreating backend\e[0m..."
 	az deployment sub create \
 	--location $LOCATION \

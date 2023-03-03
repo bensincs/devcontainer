@@ -18,5 +18,5 @@ fi
 set -euo pipefail
 
 TFPLAN_NAME=${1}
-
+echo -e "\n\e[34m»»» ✅ \e[96mRunning terraform plan with output $TFPLAN_NAME.tfplan \e[0m..."
 terraform plan -input=false -out $TFPLAN_NAME.tfplan

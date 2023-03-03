@@ -1,0 +1,27 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - bind9
+write_files:
+  - owner: root:bind
+    path: /etc/bind/named.conf.options
+    content: |
+        options {
+            directory "/var/cache/bind";
+            recursion yes;
+            allow-query { any; };
+            forwarders {
+                    168.63.129.16;
+            };
+            forward only;
+            querylog yes;
+            dnssec-enable yes;
+            dnssec-validation yes;
+            auth-nxdomain no;    # conform to RFC1035
+            listen-on { any; };
+        };
+
+runcmd:
+  - mkdir -p /var/log/named
+  - chown bind:bind /var/log/named
+  - /etc/init.d/bind9 restart

@@ -1,5 +1,14 @@
 {
 	"name": "Ben's Dev Container",
 	"dockerFile": "Dockerfile",
-	"remoteUser": "developer"
+	"remoteUser": "developer",
+	"customizations": {
+		"vscode":{
+			"extensions": [
+				"ms-vscode.azure-account",
+				"hashicorp.terraform"
+			  ]
+		}
+	}
+
 }

@@ -5,9 +5,9 @@ help: ## show this help
         | column -t -s '|'
 
 # VPN
-vpn: ## Deploy a VPN Gateway
+vpn: ## Deploy the VPN infratructure
 	@./scripts/vpn-create.sh
-vpn-destroy: ## Deploy a VPN Gateway
+vpn-destroy: ## **CAUTION** ## Deletes the VPN infratructure
 	@./scripts/vpn-destroy.sh
 vpn-client: ## **CAUTION** Setup a VPN Client
 	@./scripts/vpn-client.sh

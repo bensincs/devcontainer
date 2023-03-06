@@ -13,7 +13,7 @@ ARG USER_GID=1001
 ARG TFLINT_VERSION=0.20.1
 
 # Get our scripts tghat we'll use to configure the container
-COPY ./root-scripts /tmp/root-scripts
+COPY ./root-install-scripts /tmp/root-scripts
 # Create a non-root user to use if preferred
 RUN sudo /tmp/root-scripts/non-root-user.sh ${USERNAME} ${USER_UID} ${USER_GID}
 
@@ -24,7 +24,7 @@ RUN sudo /tmp/root-scripts/install-terraform.sh
 USER $USERNAME
 
 # Copy the scripts used to set up the dev container
-COPY --chown=$USERNAME:USER_GID  ./scripts /tmp/scripts
+COPY --chown=$USERNAME:USER_GID  ./install-scripts /tmp/scripts
 
 # Instal some common tools
 RUN sudo bash /tmp/scripts/common-tools.sh ${USERNAME}

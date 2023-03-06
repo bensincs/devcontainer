@@ -8,6 +8,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"mikestead.dotenv"
 			],
 			"settings": {
 				"workbench.colorTheme": "GitHub Dark Default",

@@ -14,5 +14,5 @@ vpn-client: ## **CAUTION** Setup a VPN Client
 	@./scripts/dns-configure.sh
 vpn-reset: ## **CAUTION** Reset the VPN and the DNS Name Resolution
 	@./scripts/vpn-reset.sh
-rdp-tunnels:
+rdp-tunnels: ## **CAUTION** Set up the vpn tunnels
 	@./scripts/rdp-tunnels.sh

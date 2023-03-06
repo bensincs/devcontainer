@@ -3,12 +3,7 @@ KEY=${1}
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Pretty banner
-echo -e "\n\e[34m╔══════════════════════════════════╗"
-echo -e "║\e[32m        Terraform Backend \e[34m        ║"
-echo -e "║\e[33m        Initialize Script  \e[34m       ║"
-echo -e "╚══════════════════════════════════╝"
-echo -e "\e[35m   v0.0.1    🚀  🚀  🚀\n"
+figlet Terraform Init
 
 echo -e "\n\e[34m»»» ✅ \e[96mChecking pre-reqs\e[0m..."
 az > /dev/null 2>&1

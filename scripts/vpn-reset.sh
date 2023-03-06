@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+figlet VPN Reset
+
 # Get the directory that this script is in so the script will work regardless
 # of where the user calls it from. If the scripts or its targets are moved,
 # these relative paths will need to be updated.

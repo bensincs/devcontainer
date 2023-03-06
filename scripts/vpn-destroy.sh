@@ -1,6 +1,6 @@
 #!/bin/bash
 
-figlet VPN Cleanup
+figlet VPN Destroy
 
 # Get the directory that this script is in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

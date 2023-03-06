@@ -1,14 +1,9 @@
 #!/bin/bash
 set -e
 
-export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-# Pretty banner
-echo -e "\n\e[34m╔══════════════════════════════════╗"
-echo -e "║\e[32m            VPN Gateway \e[34m          ║"
-echo -e "║\e[33m        Deployment Script  \e[34m       ║"
-echo -e "╚══════════════════════════════════╝"
-echo -e "\e[35m   v0.0.1    🚀  🚀  🚀\n"
+figlet VPN Create
 
+export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Pull in environment variables
 source ${DIR}/load-env.sh

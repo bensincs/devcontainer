@@ -30,7 +30,7 @@ resource "tls_self_signed_cert" "ca" {
 
   subject {
     common_name  = "CAOpenVPN"
-    organization = var.cert_organisation
+    organization = local.cert_organisation
   }
 }
 
@@ -73,7 +73,7 @@ resource "tls_cert_request" "client_cert" {
 
   subject {
     common_name  = "ClientOpenVPN"
-    organization = var.cert_organisation
+    organization = local.cert_organisation
   }
 }
 

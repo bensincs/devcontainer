@@ -1,18 +1,13 @@
 variable "location" {
   type        = string
-  description = "The Azure region for the resources (e.g. uksouth)"
 }
-variable "network_resource_group_name" {
+variable "resource_group_name" {
   type        = string
-  description = "The name of the resource group where the network is located. This is different as we use a VPN or an agent in the network to deploy the solution and thus restrict public access."
 }
-variable "vnet_name" {
+variable "subnet_id" {
   type = string
 }
 variable "gateway_public_ip_name" {
-  type = string
-}
-variable "front_end_address_space" {
   type = string
 }
 variable "vpn_client_address_space" {
@@ -22,4 +17,14 @@ variable "cert_organisation" {
   type = string
 }
 variable "tags" {
+}
+
+locals {
+  location = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id = var.subnet_id
+  gateway_public_ip_name = var.gateway_public_ip_name
+  vpn_client_address_space = var.vpn_client_address_space
+  cert_organisation = var.cert_organisation
+  tags = var.tags
 }

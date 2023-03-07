@@ -1,23 +1,11 @@
-locals {
-  front_end_subnets = cidrsubnets(var.front_end_address_space, 10, 10, 10, 10)
-}
-
-resource "azurerm_subnet" "gateway" {
-  name                 = "GatewaySubnet"
-  resource_group_name  = var.network_resource_group_name
-  virtual_network_name = var.vnet_name
-  address_prefixes     = [local.front_end_subnets.3]
-  service_endpoints    = ["Microsoft.Storage"]
-}
-
 resource "azurerm_public_ip" "vpn_ip" {
-  name                = var.gateway_public_ip_name
-  location            = var.location
-  resource_group_name = var.network_resource_group_name
+  name                = local.gateway_public_ip_name
+  location            = local.location
+  resource_group_name = local.resource_group_name
   domain_name_label   = random_string.random.result
   allocation_method   = "Dynamic"
   sku                 = "Basic"
-  tags                = var.tags
+  tags                = local.tags
   timeouts {
     read = "10m"
   }
@@ -25,9 +13,9 @@ resource "azurerm_public_ip" "vpn_ip" {
 
 resource "azurerm_virtual_network_gateway" "vpn_gateway" {
   name                = "vpn_gateway"
-  location            = var.location
-  resource_group_name = var.network_resource_group_name
-  tags                = var.tags
+  location            = local.location
+  resource_group_name = local.resource_group_name
+  tags                = local.tags
   type                = "Vpn"
   active_active       = false
   enable_bgp          = false
@@ -37,11 +25,11 @@ resource "azurerm_virtual_network_gateway" "vpn_gateway" {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.vpn_ip.id
     private_ip_address_allocation = "Dynamic"
-    subnet_id                     = azurerm_subnet.gateway.id
+    subnet_id                     = local.subnet_id
   }
 
   vpn_client_configuration {
-    address_space        = var.vpn_client_address_space
+    address_space        = local.vpn_client_address_space
     vpn_client_protocols = ["OpenVPN"]
     root_certificate {
       name             = "terraformselfsignedder"

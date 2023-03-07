@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
 figlet Terraform Apply
-
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $SCRIPT_DIR/common.sh
 source $SCRIPT_DIR/load-env.sh
+set -e
 
-echo -e "\n\e[34m»»» ✅ \e[96mChecking pre-reqs\e[0m..."
+info "Checking pre-reqs..."
 if [[ $# -lt 1 ]]; then
-  echo -e "\e[31m»»» 💥 Pass plan name as parameter to this script e.g. $0 foo"
+  die "Pass plan name as parameter to this script e.g. $0 foo"
   exit 1
 fi
-
-set -euo pipefail
-
+succ "Pre-reqs checked."
 TFPLAN_NAME=${1}
 
+info "Running terraform apply with plan output $TFPLAN_NAME.tfplan"
 terraform apply -input=false ${TFPLAN_NAME}.tfplan
+succ "Terraform applied successfully"

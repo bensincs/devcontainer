@@ -24,7 +24,8 @@
 					".devinfrastructure": "project",
 					".devinfrastructure/vpn": "guard",
 					".devinfrastructure/tf-backend": "project",
-					"root-scripts": "scripts",
+					"root-install-scripts": "scripts",
+					"install-scripts": "scripts",
 					"dotfiles": "constant",
 					".code-workspaces": "vscode"
 				},

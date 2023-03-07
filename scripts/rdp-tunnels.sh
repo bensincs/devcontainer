@@ -12,4 +12,5 @@ for index in "${!array[@]}"
 do
     port=$((5000 + $index))
     socat tcp-listen:$port,reuseaddr,fork tcp:${array[index]} &
+    echo "Tunneled: ${array[index]} => localhost:$port"
 done

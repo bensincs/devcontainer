@@ -50,3 +50,7 @@ terraform init -input=false -reconfigure \
   -backend-config="container_name=$TF_BACKEND_CONTAINER" \
   -backend-config="use_azuread_auth=true" \
   -backend-config="key=$KEY"
+
+terraform workspace list | grep $WORKSPACE && \
+	terraform workspace select $WORKSPACE || \
+	terraform workspace new $WORKSPACE

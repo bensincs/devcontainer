@@ -10,7 +10,7 @@ pushd "$DIR/../.devinfrastructure/vpn" > /dev/null
 
 # tf destroy has issues as the vpn connection we're using gets destroyed mid-way
 # so use the CLI to kill the RG
-az group delete -n $TF_VAR_network_resource_group_name
+az group delete -n $TF_VAR_vpn_resource_group_name
 rm -rf .terraform/
 rm -rf .vpn-config/
 rm -rf terraform.tfstate.d/

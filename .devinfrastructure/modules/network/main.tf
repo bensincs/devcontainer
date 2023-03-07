@@ -7,8 +7,8 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_virtual_network" "network" {
   name                = local.vnet_name
   location            = local.location
-  resource_group_name = azurerm_resource_group.network.name
-  tags                = azurerm_resource_group.network.tags
+  resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
   address_space       = local.address_space
 }
 
@@ -21,11 +21,19 @@ resource "azurerm_subnet" "default_subnet" {
   enforce_private_link_endpoint_network_policies = true
 }
 
+resource "azurerm_subnet" "gateway_subnet" {
+  name                 = "GatewaySubnet"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.network.name
+  address_prefixes     = [local.subnets.3]
+  service_endpoints    = ["Microsoft.Storage"]
+}
+
 resource "azurerm_network_security_group" "denyRDP" {
   name                = "denyRDP"
   location            = local.location
   resource_group_name = azurerm_resource_group.rg.name
-  tags                = azurerm_resource_group.rg.tags
+  tags                = local.tags
   security_rule {
     name                       = "denyRDP"
     priority                   = 1000
@@ -51,7 +59,7 @@ resource "azurerm_private_dns_zone" "local" {
 
 resource "azurerm_private_dns_zone_virtual_network_link" "local" {
   name                  = "dev.local"
-  resource_group_name   = azurerm_resource_group.rf.name
+  resource_group_name   = azurerm_resource_group.rg.name
   private_dns_zone_name = azurerm_private_dns_zone.local.name
   virtual_network_id    = azurerm_virtual_network.network.id
   registration_enabled  = true

@@ -1,19 +1,3 @@
-# module "dns_forwarder" {
-#   source              = "../virtualmachine"
-#   location            = var.location
-#   resource_group_name = var.resource_group_name
-#   tags                = var.tags
-#   vm_name             = "dns-forwarder"
-#   vm_size             = "Standard_B1s"
-#   subnet_id           = var.subnet_id
-#   cloudconfig_content = templatefile(var.cloudconfig_file, {})
-# }
-
-# resource "local_file" "ssh_key" {
-#   filename = ".sshDNSKey"
-#   content  = module.dns_forwarder.tls_private_key
-# }
-
 resource "azurerm_private_dns_resolver" "resolver" {
   name                = "resolver"
   resource_group_name = var.resource_group_name

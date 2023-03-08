@@ -13,18 +13,9 @@ function finish {
 }
 trap finish EXIT
 
+info "Getting dns forwarder ip..."
 dns_forwarder_ip=$(terraform output dns_forwarder_ip | tr -d \")
-info "Ensure VPN is connected (ping dns-forwarder:$dns_forwarder_ip)"
-set +e # handling this error and want ping output to show to user
-ping -w 20 -c 5 $dns_forwarder_ip # 5 pings for confidence, wait up to 10s overall
-ping_result=$?
-set -e
-if [[ "$ping_result" == "0" ]]; then
-    succ "ping successful"
-else
-    die "!!! ping failed to connect to dns-forwarder ($dns_forwarder_ip) - Your VPN client is probably not connected. Try 'make vpnclient'"
-    exit 1
-fi
+succ "Found dns forwarder ip: $dns_forwarder_ip."
 
 info "Setting $dns_forwarder_ip as nameserver in /etc/resolv.conf"
 if [[ $(grep -q "^nameserver $dns_forwarder_ip" /etc/resolv.conf; echo $?) == "0" ]]; then

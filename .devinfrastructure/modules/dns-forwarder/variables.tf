@@ -13,8 +13,3 @@ variable "subnet_id" {
 variable "vnet_id" {
   type = string
 }
-# variable "cloudconfig_file" {
-#   description = "The location of the cloud init configuration file."
-# }
-# variable "tags" {
-# }

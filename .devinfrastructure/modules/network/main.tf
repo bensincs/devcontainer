@@ -30,7 +30,7 @@ resource "azurerm_subnet" "gateway_subnet" {
 }
 
 resource "azurerm_subnet" "dns_subnet" {
-  name                 = "outbounddns"
+  name                 = "inbounddns"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.network.name
   address_prefixes     = [local.subnets.2]

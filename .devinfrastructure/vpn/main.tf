@@ -24,7 +24,8 @@ module "dns_resolver" {
   source              = "../modules/dns-forwarder"
   location            = var.location
   resource_group_name = var.vpn_resource_group_name
-  tags                = var.vpn_default_tags
-  subnet_id           = module.network.default_subnet_id
-  cloudconfig_file    = "../modules/dns-forwarder/cloudinit.yml"
+  # tags                = var.vpn_default_tags
+  subnet_id           = module.network.dns_subnet_id
+  vnet_id             = module.network.vnet_id
+  # cloudconfig_file    = "../modules/dns-forwarder/cloudinit.yml"
 }

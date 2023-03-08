@@ -18,7 +18,7 @@ resource "azurerm_subnet" "default_subnet" {
   resource_group_name                            = azurerm_resource_group.rg.name
   address_prefixes                               = [local.subnets.1]
   service_endpoints                              = ["Microsoft.ContainerRegistry", "Microsoft.AzureActiveDirectory", "Microsoft.Storage", "Microsoft.KeyVault", "Microsoft.EventHub", "Microsoft.ServiceBus", "Microsoft.Sql"]
-  enforce_private_link_endpoint_network_policies = true
+  private_endpoint_network_policies_enabled = true
 }
 
 resource "azurerm_subnet" "gateway_subnet" {
@@ -27,6 +27,21 @@ resource "azurerm_subnet" "gateway_subnet" {
   virtual_network_name = azurerm_virtual_network.network.name
   address_prefixes     = [local.subnets.3]
   service_endpoints    = ["Microsoft.Storage"]
+}
+
+resource "azurerm_subnet" "dns_subnet" {
+  name                 = "outbounddns"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.network.name
+  address_prefixes     = [local.subnets.2]
+
+  delegation {
+    name = "Microsoft.Network.dnsResolvers"
+    service_delegation {
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+      name    = "Microsoft.Network/dnsResolvers"
+    }
+  }
 }
 
 resource "azurerm_network_security_group" "denyRDP" {

@@ -20,3 +20,6 @@ infrastructure/vpn/.resolv.bak
 infrastructure/vpn/vpn-plan
 .vpn-config
 .resolv.bak
+
+
+.DS_Store

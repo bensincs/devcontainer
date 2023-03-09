@@ -12,19 +12,26 @@ ARG USER_GID=1001
 #VERSION ARGS
 ARG TFLINT_VERSION=0.20.1
 
+USER root
 # Get our scripts tghat we'll use to configure the container
-COPY ./root-install-scripts /tmp/root-scripts
+COPY --chown=root:root ./root-install-scripts /tmp/root-scripts
 # Create a non-root user to use if preferred
 RUN sudo /tmp/root-scripts/non-root-user.sh ${USERNAME} ${USER_UID} ${USER_GID}
 
 # Install Terraform
 RUN sudo /tmp/root-scripts/install-terraform.sh
 
+# Install Kubectl
+RUN sudo /tmp/root-scripts/install-kubectl.sh
+
+# Install python
+RUN sudo /tmp/root-scripts/install-python.sh
+
 # Become that user
 USER $USERNAME
 
 # Copy the scripts used to set up the dev container
-COPY --chown=$USERNAME:USER_GID  ./install-scripts /tmp/scripts
+COPY --chown=$USERNAME:$USER_GID  ./install-scripts /tmp/scripts
 
 # Instal some common tools
 RUN sudo bash /tmp/scripts/common-tools.sh ${USERNAME}
@@ -36,10 +43,10 @@ RUN sudo bash /tmp/scripts/install-azcli.sh ${USERNAME}
 RUN sudo bash /tmp/scripts/install-azbrowse.sh ${USERNAME}
 
 # Install GOLANG
-# Install PYTHON
-# Install DOTNET
-# Install Kubernetes
-# Install Typescript
+RUN sudo bash /tmp/scripts/install-go.sh
+
+# Install .NET
+RUN /tmp/scripts/install-dotnet.sh
 
 # Configure zsh
 ENV TERM xterm
@@ -47,7 +54,7 @@ ENV SHELL /bin/zsh
 RUN bash /tmp/scripts/install-oh-my-zsh.sh
 
 # Copy our dot files
-COPY --chown=$USERNAME:USER_GID ./dotfiles /home/$USERNAME
+COPY --chown=$USERNAME:$USER_GID ./dotfiles /home/$USERNAME
 
 # SET PATH
-ENV PATH="$PATH:/home/$USERNAME/bin"
+ENV PATH="$PATH:/home/$USERNAME/bin:/usr/local/go/bin:/home/$USERNAME/.dotnet"

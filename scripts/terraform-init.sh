@@ -49,7 +49,7 @@ else
 fi
 
 info "Terraform init..."
-terraform init -input=false -reconfigure \
+terraform init -input=false -reconfigure -upgrade \
   -backend-config="resource_group_name=$TF_BACKEND_RG" \
   -backend-config="storage_account_name=$TF_BACKEND_SA" \
   -backend-config="container_name=$TF_BACKEND_CONTAINER" \

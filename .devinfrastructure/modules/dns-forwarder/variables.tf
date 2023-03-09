@@ -9,8 +9,7 @@ variable "resource_group_name" {
 variable "subnet_id" {
   type = string
 }
-variable "cloudconfig_file" {
-  description = "The location of the cloud init configuration file."
-}
-variable "tags" {
+
+variable "vnet_id" {
+  type = string
 }
